@@ -10,16 +10,6 @@
 		33F239882E6931B4005971B6 /* `a.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "`a.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		339882112E6F1B1A00A8EC7A /* Exceptions for "`a" folder in "`a" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"-a-Info.plist",
-			);
-			target = 33F239872E6931B4005971B6 /* `a */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 		3398820F2E6F123600A8EC7A /* Exceptions for "`a" folder in "Copy Bundle Resources" phase from "`a" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
@@ -34,7 +24,6 @@
 		33F2398A2E6931B4005971B6 /* `a */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				339882112E6F1B1A00A8EC7A /* Exceptions for "`a" folder in "`a" target */,
 				3398820F2E6F123600A8EC7A /* Exceptions for "`a" folder in "Copy Bundle Resources" phase from "`a" target */,
 			);
 			path = "`a";
