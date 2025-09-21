@@ -13,12 +13,12 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var SearchCity = ""
-    let cityCardList = [ CityCard(name: "Москва", temperature: "25.0"+" °C", icon: "sun.max", ShortWeather: "Солнечно"),
-    CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud.moon.fill", ShortWeather: "Облачно")]
+    let cityCardList = [ CityCard(name: "Москва", temperature: "25.0"+" °C", icon: "sun.max", ShortWeather: "Солнечно", temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", timeSunUp: "6:05", timeSunDown: "21:15", date: "15.09.2025" ),
+    CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud.moon.fill", ShortWeather: "Облачно",temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", timeSunUp: "6:05", timeSunDown: "21:15", date: "15.09.2025"  )]
     
     var body: some View {
         VStack{
-            TextField("Search", text: $SearchCity)
+            TextField("Поиск", text: $SearchCity)
                 .padding()
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(10)
@@ -34,6 +34,7 @@ struct ContentView: View {
                 }
                 .padding(.horizontal,20)
             }
+            
         }
     }
 }

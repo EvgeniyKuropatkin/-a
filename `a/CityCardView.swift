@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CityCardView: View {
     let cityCard: CityCard
+    @State private var showDetails = false;
+    @State private var showCityCard = true;
     
     var body: some View {
         ZStack {
@@ -16,13 +18,10 @@ struct CityCardView: View {
                 VStack(alignment: .leading, spacing: 10){
                     Text(cityCard.name)
                         .foregroundColor(.yellow)
-                        //.padding(5)
                     Text(cityCard.temperature)
                         .foregroundColor(.yellow)
-                        //.padding(5)
                     Text(cityCard.ShortWeather)
                         .foregroundColor(.yellow)
-                        //.padding(5)
                     
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -33,7 +32,8 @@ struct CityCardView: View {
             }
             .overlay(alignment: .topTrailing){
                 Button{
-                    //?
+                    self.showCityCard.toggle()//???
+                    
                 }
                 label:{
                     Image(systemName: "xmark.circle.fill")
@@ -41,7 +41,13 @@ struct CityCardView: View {
                         .padding(5)
                 }
             }
-            Button(action: {}, label: {Text("Детали")})
+            Button(action: {
+                self.showDetails.toggle();
+            }, label: {Text("Детали")})
+            .sheet(isPresented: $showDetails){
+                showDetailsView(cityCard:cityCard)
+            }
+            
         }
             .background(Color.black)
             .cornerRadius(10)
@@ -50,5 +56,5 @@ struct CityCardView: View {
 }
 
 #Preview {
-    CityCardView(cityCard: CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud.moon.fill", ShortWeather: "Облачно"))
+    CityCardView(cityCard: CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud.moon.fill", ShortWeather: "Облачно",temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", timeSunUp: "6:05", timeSunDown: "21:15", date: "15.09.2025" ))
 }
