@@ -12,6 +12,7 @@ import SwiftUI
 struct showDetailsView: View {
     
     let cityCard: CityCard
+    @State private var whichForcast = false;
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -34,7 +35,7 @@ struct showDetailsView: View {
                 
             }
             
-            VStack(alignment: .center, spacing: 50){
+            VStack(alignment: .center, spacing: 20){
                 Text("\(cityCard.date)")
                 
                 Text("\(cityCard.temperature)")
@@ -48,7 +49,7 @@ struct showDetailsView: View {
                     Text("max")
                     Text("\(cityCard.temperatureMax)")
                 }
-                Image(systemName: cityCard.icon)
+                Image(cityCard.icon)
                     .resizable()
                     .frame(width: 170, height: 150)
                 Text("\(cityCard.ShortWeather)")
@@ -64,9 +65,29 @@ struct showDetailsView: View {
                         .frame(width: 30, height: 30)
                     Text("\(cityCard.timeSunDown)")
                 }
+                VStack{
+                    HStack{
+                        Button(action: {
+                            self.whichForcast.toggle();
+                        }, label: {Text("Почасовой прогноз")})
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        Button(action: {
+                            self.whichForcast.toggle();
+                        }, label: {Text("Прогноз на 7 дней")})
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding()
+                    }
+                    switch whichForcast {
+                    case false:
+                        hourlyForcast()
+                    case true:
+                        hourlyForcast()
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
         }
     }
 }
