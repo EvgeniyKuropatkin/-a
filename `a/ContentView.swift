@@ -63,9 +63,11 @@ struct ContentView: View {
                     ShortWeather: firstItem.weather.first?.main ?? "Погода",
                     temperatureMin: String(format: "%.0f°C", firstItem.main.tempMin),
                     temperatureMax: String(format: "%.0f°C", firstItem.main.tempMax),
-                    timeSunUp: "--:--",
-                    timeSunDown: "--:--",
+                    wind: String(format: "%.0f м/с", firstItem.wind.speed),
+                    
+                    humidity: Int(firstItem.main.humidity),
                     date: formatDate(firstItem.dtTxt)
+                    
                 )
                 
                 await MainActor.run {

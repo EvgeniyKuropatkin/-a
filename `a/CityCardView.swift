@@ -80,8 +80,8 @@ struct CityCardView: View {
         ShortWeather: "Облачно",
         temperatureMin: "15.0 °C",
         temperatureMax: "35.0 °C",
-        timeSunUp: "6:05",
-        timeSunDown: "21:15",
+        wind: "15 м/с",
+        humidity: 40,
         date: "15.09.2025"
     )) {
         // Пустое замыкание для preview
