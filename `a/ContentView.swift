@@ -5,38 +5,112 @@
 //  Created by 1111 on 04.09.2025.
 //
 
+// ContentView.swift
 import SwiftUI
 
-
-
-
 struct ContentView: View {
+    var firstSearch = "Москва"
+    var secondSearch = "Ростов-на-Дону"
     
     @State private var SearchCity = ""
-    let cityCardList = [ CityCard(name: "Москва", temperature: "25.0"+" °C", icon: "sun.max", ShortWeather: "Солнечно", temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", timeSunUp: "6:05", timeSunDown: "21:15", date: "15.09.2025" ),
-    CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud.moon.fill", ShortWeather: "Облачно",temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", timeSunUp: "6:05", timeSunDown: "21:15", date: "15.09.2025"  )]
+    @State private var cityCards: [CityCard] = []
+    @State private var errorMessage: String?
     
     var body: some View {
-        VStack{
-            TextField("Поиск", text: $SearchCity)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(10)
-                .padding(.horizontal,10)
-                .padding(.top,10)
-                .padding(.bottom,10)
-        
-        
-            ScrollView(.vertical, showsIndicators: false){
-                ForEach(cityCardList, id: \.self) { elem in
-                    
-                    CityCardView(cityCard:elem)
+
+        VStack {
+            TextField("Поиск", text: $SearchCity, onCommit: {
+                addCity(named: SearchCity)
+                SearchCity = ""
+            })
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding()
+            .onAppear {
+                addCity(named: firstSearch)
+                addCity(named: secondSearch)
+            }
+            
+            ScrollView {
+                ForEach(cityCards) { card in
+                    CityCardView(cityCard: card) {
+                        cityCards.removeAll { $0.id == card.id }
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal,20)
+            }
+        }
+        .background(Image("backgroundForApp"))
+        .alert("Ошибка", isPresented: .constant(errorMessage != nil)) {
+            Button("OK") { errorMessage = nil }
+        } message: {
+            Text(errorMessage ?? "Неизвестная ошибка")
+        }
+
+    }
+        
+    
+    private func addCity(named cityName: String) {
+        Task {
+            do {
+                let forecastResponse = try await NetworkManager.shared.getWeather(for: cityName)
+                
+                guard let firstItem = forecastResponse.list.first else { return }
+                
+                let newCard = CityCard(
+                    name: forecastResponse.city.name,
+                    temperature: String(format: "%.0f°C", firstItem.main.temp),
+                    icon: mapIcon(firstItem.weather.first?.icon ?? "01d"),
+                    ShortWeather: firstItem.weather.first?.main ?? "Погода",
+                    temperatureMin: String(format: "%.0f°C", firstItem.main.tempMin),
+                    temperatureMax: String(format: "%.0f°C", firstItem.main.tempMax),
+                    timeSunUp: "--:--",
+                    timeSunDown: "--:--",
+                    date: formatDate(firstItem.dtTxt)
+                )
+                
+                await MainActor.run {
+                    if !cityCards.contains(where: { $0.name == newCard.name }) {
+                        cityCards.append(newCard)
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    errorMessage = "Город не найден"
+                }
             }
             
         }
+
     }
+    
+    
+    private func formatDate(_ dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        if let date = inputFormatter.date(from: dateString) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "dd.MM.yyyy"
+            return outputFormatter.string(from: date)
+        }
+        return "—"
+    }
+    
+    private func mapIcon(_ code: String) -> String {
+        switch code.prefix(2) {
+        case "01": return "sun.max"
+        case "02": return "cloud.sun"
+        case "03", "04": return "cloud"
+        case "09": return "cloud.rain"
+        case "10": return "cloud.sun.rain"
+        case "11": return "cloud.bolt.rain"
+        case "13": return "snow"
+        case "50": return "cloud.fog"
+        default: return "cloud"
+        }
+    }
+
 }
 
 #Preview {

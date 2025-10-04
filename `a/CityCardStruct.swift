@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct CityCard: Hashable{
+struct CityCard: Hashable, Identifiable {
+    let id = UUID()
     var name: String
     var temperature: String
     var icon: String

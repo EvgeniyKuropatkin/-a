@@ -56,11 +56,11 @@ struct showDetailsView: View {
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                 HStack{
-                    Image("sunUp")
+                    Image("wind")
                         .resizable()
                         .frame(width: 30, height: 30)
                     Text("\(cityCard.timeSunUp)")
-                    Image("sunDown")
+                    Image("humidity")
                         .resizable()
                         .frame(width: 30, height: 30)
                     Text("\(cityCard.timeSunDown)")
@@ -68,27 +68,28 @@ struct showDetailsView: View {
                 VStack{
                     HStack{
                         Button(action: {
-                            self.whichForcast.toggle();
+                            self.whichForcast=false;
                         }, label: {Text("Почасовой прогноз")})
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                         Button(action: {
-                            self.whichForcast.toggle();
+                            self.whichForcast=true;
                         }, label: {Text("Прогноз на 7 дней")})
                         .frame(maxWidth: .infinity, alignment: .trailing)
                         .padding()
                     }
                     switch whichForcast {
                     case false:
-                        hourlyForcast()
+                        hourlyForecast()
                     case true:
-                        hourlyForcast()
+                        dailyForecast()
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
             }
         }
+        .background(Image("backgroundForApp"))
     }
 }
 

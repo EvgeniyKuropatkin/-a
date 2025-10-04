@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct hourlyForcaststruct: Hashable{
+struct hourlyForecastStruct: Hashable{
     var time: String
     var temperature: String
     var icon: String
