@@ -15,8 +15,8 @@ struct CityCard: Hashable, Identifiable {
     var ShortWeather: String
     var temperatureMin: String
     var temperatureMax: String
-    var timeSunUp: String
-    var timeSunDown: String
+    var wind: String
+    var humidity: Int
     var date: String
 }
 

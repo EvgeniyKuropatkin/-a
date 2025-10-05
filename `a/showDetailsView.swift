@@ -59,11 +59,12 @@ struct showDetailsView: View {
                     Image("wind")
                         .resizable()
                         .frame(width: 30, height: 30)
-                    Text("\(cityCard.timeSunUp)")
+                    Text("\(cityCard.wind)")
+                        .padding(.trailing, 20.0)
                     Image("humidity")
                         .resizable()
                         .frame(width: 30, height: 30)
-                    Text("\(cityCard.timeSunDown)")
+                    Text("\(cityCard.humidity)"+"%")
                 }
                 VStack{
                     HStack{
@@ -94,5 +95,5 @@ struct showDetailsView: View {
 }
 
 #Preview {
-    showDetailsView(cityCard: CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud.moon.fill", ShortWeather: "Облачно",temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", timeSunUp: "6:05", timeSunDown: "21:15", date: "15.09.2025" ))
+    showDetailsView(cityCard: CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud", ShortWeather: "Облачно",temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", wind: "6 м/с", humidity: 40, date: "15.09.2025" ))
 }
