@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // TODO: Нужно сделать документацию
     var firstSearch = "Москва"
     var secondSearch = "Ростов-на-Дону"
     
