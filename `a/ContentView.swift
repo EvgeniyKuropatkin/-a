@@ -104,11 +104,9 @@ struct ContentView: View {
         case "01": return "sun.max"
         case "02": return "cloud.sun"
         case "03", "04": return "cloud"
-        case "09": return "cloud.rain"
-        case "10": return "cloud.sun.rain"
-        case "11": return "cloud.bolt.rain"
+        case "09", "10": return "cloud.rain"
+        case "11": return "bolt"
         case "13": return "snow"
-        case "50": return "cloud.fog"
         default: return "cloud"
         }
     }
