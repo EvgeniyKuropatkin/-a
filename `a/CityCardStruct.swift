@@ -8,7 +8,7 @@
 import Foundation
 
 struct CityCard: Hashable, Identifiable {
-    // TODO: Нужно сделать документацию
+    // TODO: Нужно
     let id = UUID()
     var name: String
     var temperature: String
