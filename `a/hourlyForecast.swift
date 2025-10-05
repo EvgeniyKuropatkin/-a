@@ -9,6 +9,7 @@ import SwiftUI
 
 struct hourlyForecast: View {
     
+    // TODO: сделай читаемо
     let hourlyForecastList=[hourlyForecastStruct(time: "13:00", temperature: "15°C", icon: "sun.max"), hourlyForecastStruct(time: "14:00", temperature: "15°C", icon: "sun.max"), hourlyForecastStruct(time: "15:00", temperature: "15°C", icon: "sun.max"), hourlyForecastStruct(time: "16:00", temperature: "15°C", icon: "sun.max"), hourlyForecastStruct(time: "17:00", temperature: "15°C", icon: "sun.max"),hourlyForecastStruct(time: "18:00", temperature: "15°C", icon: "sun.max"), hourlyForecastStruct(time: "19:00", temperature: "15°C", icon: "sun.max"),hourlyForecastStruct(time: "20:00", temperature: "15°C", icon: "sun.max"), hourlyForecastStruct(time: "21:00", temperature: "15°C", icon: "sun.max")]
     
     var body: some View {
@@ -22,7 +23,8 @@ struct hourlyForecast: View {
                             Text(elem.temperature)
                         }
                     }
-                
+                    
+                    // TODO: сделай читаемо
             }.padding()
                 .background(
                     .ultraThinMaterial

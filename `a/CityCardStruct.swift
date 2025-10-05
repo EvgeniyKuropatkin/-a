@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: Посмотри как сделать структуру проекта, у меня есть пример, но лучше самому посмотреть, добавь gitignore,чтобы на git не заливать лишние файлы
 struct CityCard: Hashable, Identifiable {
     // TODO: Нужно
     let id = UUID()

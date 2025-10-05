@@ -5,6 +5,7 @@
 //  Created by 1111 on 30.09.2025.
 //
 
+// TODO: Структура должна находится в отдельном файле, документация
 import Foundation
 
 // MARK: - Welcome

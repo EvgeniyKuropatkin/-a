@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     // TODO: Нужно сделать документацию
-    var firstSearch = "Москва"
+    let firstSearch = "Москва"
     var secondSearch = "Ростов-на-Дону"
     
     @State private var SearchCity = ""
@@ -57,6 +57,7 @@ struct ContentView: View {
                 
                 guard let firstItem = forecastResponse.list.first else { return }
                 
+                // TODO: Не делай ненужные отступы
                 let newCard = CityCard(
                     name: forecastResponse.city.name,
                     temperature: String(format: "%.0f°C", firstItem.main.temp),
@@ -65,11 +66,23 @@ struct ContentView: View {
                     temperatureMin: String(format: "%.0f°C", firstItem.main.tempMin),
                     temperatureMax: String(format: "%.0f°C", firstItem.main.tempMax),
                     wind: String(format: "%.0f м/с", firstItem.wind.speed),
-                    
                     humidity: Int(firstItem.main.humidity),
                     date: formatDate(firstItem.dtTxt)
-                    
                 )
+                
+//                let newCard = CityCard(
+//                    name: forecastResponse.city.name,
+//                    temperature: String(format: "%.0f°C", firstItem.main.temp),
+//                    icon: mapIcon(firstItem.weather.first?.icon ?? "01d"),
+//                    ShortWeather: firstItem.weather.first?.main ?? "Погода",
+//                    temperatureMin: String(format: "%.0f°C", firstItem.main.tempMin),
+//                    temperatureMax: String(format: "%.0f°C", firstItem.main.tempMax),
+//                    wind: String(format: "%.0f м/с", firstItem.wind.speed),
+//                    
+//                    humidity: Int(firstItem.main.humidity),
+//                    date: formatDate(firstItem.dtTxt)
+//                    
+//                )
                 
                 await MainActor.run {
                     if !cityCards.contains(where: { $0.name == newCard.name }) {
@@ -86,7 +99,7 @@ struct ContentView: View {
 
     }
     
-    
+    // TODO: сделай отдельную структуру Helper, в которой будут такие функцию
     private func formatDate(_ dateString: String) -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -100,6 +113,8 @@ struct ContentView: View {
         return "—"
     }
     
+    
+    // TODO: Сделай отдельный enum в котором будут храниться это данные (они не изменяемые, поэтому enum)
     private func mapIcon(_ code: String) -> String {
         switch code.prefix(2) {
         case "01": return "sun.max"

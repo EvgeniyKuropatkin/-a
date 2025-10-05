@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-
+// TODO: Структура пишеться с большой буквы, документация
 struct showDetailsView: View {
     
     let cityCard: CityCard
@@ -95,5 +95,6 @@ struct showDetailsView: View {
 }
 
 #Preview {
+//    TODO: Сделай читаемо
     showDetailsView(cityCard: CityCard(name: "Нью-Йорк", temperature: "15.0"+" °C", icon: "cloud.rain", ShortWeather: "Облачно",temperatureMin: "15.0"+" °C", temperatureMax: "35.0"+" °C", wind: "6 м/с", humidity: 40, date: "15.09.2025" ))
 }

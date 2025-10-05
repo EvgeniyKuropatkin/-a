@@ -31,6 +31,9 @@ final class NetworkManager {
         }
     }
 }
+
+
+// TODO: отдельно в файл (можно создать отдельную папку и туда складывать enum)
 enum NetworkError: String, Error{
     case invalidURL = "InvalidURL"
     case invalidResponse = "InvalidResponse"

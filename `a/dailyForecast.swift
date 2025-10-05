@@ -9,6 +9,7 @@ import SwiftUI
 
 struct dailyForecast: View {
     
+    // TODO: сделай читаемо
     let dailyForecastList=[dailyForecastStruct(day: "13.05", temperature: "15°C", icon: "sun.max"), dailyForecastStruct(day: "14.05", temperature: "15°C", icon: "sun.max"), dailyForecastStruct(day: "15.05", temperature: "15°C", icon: "sun.max"), dailyForecastStruct(day: "16.05", temperature: "15°C", icon: "sun.max"), dailyForecastStruct(day: "17.05", temperature: "15°C", icon: "sun.max"),dailyForecastStruct(day: "18.05", temperature: "15°C", icon: "sun.max"), dailyForecastStruct(day: "19.05", temperature: "15°C", icon: "sun.max"),dailyForecastStruct(day: "20.05", temperature: "15°C", icon: "sun.max"), dailyForecastStruct(day: "21.05", temperature: "15°C", icon: "sun.max")]
     
     var body: some View {
@@ -22,7 +23,8 @@ struct dailyForecast: View {
                             Text(elem.temperature)
                         }
                     }
-                
+                    
+                    // TODO: сделай читаемо
             }.padding()
                     .background(
                                 // Основа: материал с размытием
