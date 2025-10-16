@@ -8,42 +8,71 @@
 import SwiftUI
 ///Структура для описания прогноза погоды на 7 дней
 struct DailyForecast: View {
-    ///список данных
-    let DailyForecastList=[DailyForecastStruct(day: "13.05",temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "14.05", temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "15.05", temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "16.05", temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "17.05", temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "18.05", temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "19.05", temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "20.05", temperature: "15°C", icon: "sun.max"),
-                           DailyForecastStruct(day: "21.05", temperature: "15°C", icon: "sun.max")]
-    
+    ///Переменная для хранения извлеченных данных
+    @State private var items: [DailyForecastStruct] = []
+    ///Переменная для обозначения загрузки
+    @State private var isLoading = false
+    ///Переменную берем извне
+    let cityName: String
+
     var body: some View {
-            ScrollView(.horizontal, showsIndicators: false){
-                HStack{
-                    ForEach(DailyForecastList, id: \.self) { elem in
-                        
-                        VStack{
-                            Text(elem.day)
-                            Image(elem.icon)
-                            Text(elem.temperature)
+        Group {
+            if isLoading {
+                ProgressView("Загрузка...")
+            } else if items.isEmpty {
+                Text("Нет данных")
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(items, id: \.day) { item in
+                            VStack(spacing: 6) {
+                                Text(item.day)
+                                    .font(.caption)
+                                Image(item.icon)
+                                    .font(.title2)
+                                Text(item.temperature)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                            }
+                            .frame(width: 60)
                         }
+                    }
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(.white.opacity(0.2), lineWidth: 1)
+                    )
+                    .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 4)
                 }
             }
-            .padding()
-            .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(RoundedRectangle(cornerRadius: 20)
-            .stroke(.white.opacity(0.2), lineWidth: 1))
-            .shadow(color: .black.opacity(0.1),
-                    radius: 10, x: 0, y: 4)
-            .cornerRadius(20)
         }
-        
+        .onAppear {
+            loadForecast()
+        }
+    }
+
+    private func loadForecast() {
+        guard !isLoading else { return }
+        isLoading = true
+        Task {
+            do {
+                let weather = try await NetworkManager.shared.getWeather(for: cityName)
+                await MainActor.run {
+                    self.items = weather.dailyForecast
+                    self.isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    print("Ошибка: \(error)")
+                    self.isLoading = false
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    DailyForecast()
+    DailyForecast(cityName: "Paris")
 }

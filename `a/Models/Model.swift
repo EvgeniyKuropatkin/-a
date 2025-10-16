@@ -43,19 +43,19 @@ struct Coord: Codable {
 struct List: Codable {
     ///Дата и время
     let dt: Int
-    ///
+    ///Информация об основных метеорологических показателей
     let main: Main
-    ///информация о погоде
+    ///Информация о погоде
     let weather: [Weather]
-    ///информация об облаках
+    ///Информация об облачности
     let clouds: Clouds
-    ///
+    ///Информация о ветре
     let wind: Wind
-    ///
+    ///Информация о части суток
     let sys: Sys
-    ///
+    ///Дата и время
     let dtTxt: String
-    ///
+    ///Информация о б осадках
     let rain: Rain?
     /// Ключи декодирования JSON-ответа от OpenWeatherMap API.
     enum CodingKeys: String, CodingKey {
@@ -122,9 +122,9 @@ struct Main: Codable {
 struct Rain: Codable {
 }
 
-///системная информация о погоде
+///Системная информация о погоде
 struct Sys: Codable {
-    ///часть суток: "d" - день   "n" ночь
+    ///Часть суток: "d" - день   "n" ночь
     let pod: String
 }
 

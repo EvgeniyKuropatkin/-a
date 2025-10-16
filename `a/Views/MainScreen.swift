@@ -62,8 +62,6 @@ struct MainScreen: View {
                     temperature: String(format: "%.0f°C", firstItem.main.temp),
                     icon: mapIcon(firstItem.weather.first?.icon ?? "01d"),
                     ShortWeather: firstItem.weather.first?.main ?? "Погода",
-                    temperatureMin: String(format: "%.0f°C", firstItem.main.tempMin),
-                    temperatureMax: String(format: "%.0f°C", firstItem.main.tempMax),
                     wind: String(format: "%.0f м/с", firstItem.wind.speed),
                     humidity: Int(firstItem.main.humidity),
                     date: formatDate(firstItem.dtTxt)

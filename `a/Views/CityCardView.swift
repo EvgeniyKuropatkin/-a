@@ -83,8 +83,6 @@ struct CityCardView: View {
             temperature: "15.0 °C",
             icon: "cloud.rain",
             ShortWeather: "Облачно",
-            temperatureMin: "15.0 °C",
-            temperatureMax: "35.0 °C",
             wind: "15 м/с",
             humidity: 40,
             date: "15.09.2025"

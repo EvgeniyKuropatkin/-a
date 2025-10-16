@@ -7,42 +7,74 @@
 
 import SwiftUI
 ///Структура для описания почасового прогноза погоды
+import SwiftUI
+
 struct HourlyForecast: View {
-    ///Список данных
-    let HourlyForecastList=[HourlyForecastStruct(time: "13:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "14:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "15:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "16:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "17:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "18:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "19:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "20:00", temperature: "15°C", icon: "sun.max"),
-                            HourlyForecastStruct(time: "21:00", temperature: "15°C", icon: "sun.max")]
-    
+    ///Переменная для хранения извлеченных данных
+    @State private var items: [HourlyForecastStruct] = []
+    ///Переменная для обозначения загрузки
+    @State private var isLoading = false
+    ///Переменную берем извне
+    let cityName: String
+
     var body: some View {
-            ScrollView(.horizontal, showsIndicators: false){
-                HStack{
-                    ForEach(HourlyForecastList, id: \.self) { elem in
-                        
-                        VStack{
-                            Text(elem.time)
-                            Image(elem.icon)
-                            Text(elem.temperature)
+        Group {
+            if isLoading {
+                ProgressView("Загрузка...")
+            } else if items.isEmpty {
+                Text("Нет данных")
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(items, id: \.time) { item in
+                            VStack(spacing: 6) {
+                                Text(item.time)
+                                    .font(.caption)
+                                Image(item.icon)
+                                    .font(.title2)
+                                Text(item.temperature)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                            }
+                            .frame(width: 60)
                         }
+                    }
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(.white.opacity(0.2), lineWidth: 1)
+                    )
+                    .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 4)
                 }
             }
-            .padding()
-            .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(RoundedRectangle(cornerRadius: 20)
-            .stroke(.white.opacity(0.2), lineWidth: 1))
-            .shadow(color: .black.opacity(0.1),
-                    radius: 10, x: 0, y: 4)
-            .cornerRadius(20)
+        }
+        .onAppear {
+            loadForecast()
+        }
+    }
+
+    private func loadForecast() {
+        guard !isLoading else { return }
+        isLoading = true
+        Task {
+            do {
+                let weather = try await NetworkManager.shared.getWeather(for: cityName)
+                await MainActor.run {
+                    self.items = weather.hourlyForecast
+                    self.isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    print("Ошибка загрузки: \(error)")
+                    self.isLoading = false
+                }
+            }
         }
     }
 }
 
 #Preview {
-    HourlyForecast()
+    HourlyForecast(cityName: "Paris")
 }

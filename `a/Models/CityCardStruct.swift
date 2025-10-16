@@ -18,10 +18,6 @@ struct CityCard: Hashable, Identifiable {
     var icon: String
     ///Кратное описание погоды в текущий момент
     var ShortWeather: String
-    ///Минимальная температура за день
-    var temperatureMin: String
-    ///Максимальная температура за день
-    var temperatureMax: String
     ///Скорость ветра в текущий момент
     var wind: String
     ///Влажность в текущий момент

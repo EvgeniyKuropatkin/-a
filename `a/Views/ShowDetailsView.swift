@@ -12,7 +12,7 @@ struct ShowDetailsView: View {
     let cityCard: CityCard
     ///Переменная для работы переключения между почасовым прогнозом погоды и прогнозом погоды на 7 дней
     @State private var whichForecast: Bool = false
-    ///Ппеременная для закрытия подробностей прогноза погоды через кнопку
+    ///Переменная для закрытия подробностей прогноза погоды через кнопку
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack{
@@ -40,21 +40,6 @@ struct ShowDetailsView: View {
                 Text("\(cityCard.temperature)")
                     .font(.title)
                 
-                HStack{
-                    Image(systemName: "arrow.down")
-                    
-                    Text("min")
-                    
-                    Text("\(cityCard.temperatureMin)")
-                    .padding(.trailing, 20.0)
-                    
-                    Image(systemName: "arrow.up")
-                    
-                    Text("max")
-                    
-                    Text("\(cityCard.temperatureMax)")
-                }
-                
                 Image(cityCard.icon)
                     .resizable()
                     .frame(width: 170, height: 150)
@@ -62,6 +47,7 @@ struct ShowDetailsView: View {
                 Text("\(cityCard.ShortWeather)")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
+                    .padding()
                 
                 HStack{
                     Image("wind")
@@ -79,7 +65,7 @@ struct ShowDetailsView: View {
                 }
                 
                 Picker("Тип прогноза", selection: $whichForecast) {
-                    Text("Почасовой прогноз")
+                    Text("Прогноз на каждые 3 часа")
                         .tag(false)
                     
                     Text("Прогноз на 7 дней")
@@ -88,9 +74,11 @@ struct ShowDetailsView: View {
                 .pickerStyle(.segmented)
                     
                 if whichForecast {
-                    DailyForecast()
+                    DailyForecast(cityName: cityCard.name)
+                        .padding(10.0)
                 } else {
-                    HourlyForecast()
+                    HourlyForecast(cityName: cityCard.name)
+                        .padding(10.0)
                 }
             }
         }
@@ -104,8 +92,6 @@ struct ShowDetailsView: View {
                 temperature: "15.0"+" °C",
                 icon: "cloud.rain",
                 ShortWeather: "Дождь",
-                temperatureMin: "15.0"+" °C",
-                temperatureMax: "35.0"+" °C",
                 wind: "6 м/с",
                 humidity: 40,
                 date: "15.09.2025" ))
