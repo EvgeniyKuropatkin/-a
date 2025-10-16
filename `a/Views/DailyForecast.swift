@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-
+///Структура для описания прогноза погоды на 7 дней
 struct DailyForecast: View {
-    
+    ///список данных
     let DailyForecastList=[DailyForecastStruct(day: "13.05",temperature: "15°C", icon: "sun.max"),
                            DailyForecastStruct(day: "14.05", temperature: "15°C", icon: "sun.max"),
                            DailyForecastStruct(day: "15.05", temperature: "15°C", icon: "sun.max"),

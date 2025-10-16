@@ -8,7 +8,7 @@
 // ContentView.swift
 import SwiftUI
 ///Структура предназначенная для показа первого экрана, содержащего 2 города искомых по умолчанию и поле поиска нового города
-struct ContentView: View {
+struct MainScreen: View {
     ///Переменная для нахождения первого города по умолчанияю
     let firstSearch = "Москва"
     ///Переменная для нахождения второго города по умолчанияю
@@ -85,5 +85,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MainScreen()
 }

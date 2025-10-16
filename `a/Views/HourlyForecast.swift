@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-
+///Структура для описания почасового прогноза погоды
 struct HourlyForecast: View {
-    
+    ///Список данных
     let HourlyForecastList=[HourlyForecastStruct(time: "13:00", temperature: "15°C", icon: "sun.max"),
                             HourlyForecastStruct(time: "14:00", temperature: "15°C", icon: "sun.max"),
                             HourlyForecastStruct(time: "15:00", temperature: "15°C", icon: "sun.max"),

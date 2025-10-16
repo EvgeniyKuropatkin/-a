@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
-
-
+///Структура для показа детального прогноза погоды в выбранном городе
 struct ShowDetailsView: View {
-    
+    ///переменная принимающая данные
     let cityCard: CityCard
+    ///Переменная для работы переключения между почасовым прогнозом погоды и прогнозом погоды на 7 дней
     @State private var whichForecast: Bool = false
-    
-    
+    ///Ппеременная для закрытия подробностей прогноза погоды через кнопку
     @Environment(\.presentationMode) var presentationMode
-    
     var body: some View {
         VStack{
             VStack{

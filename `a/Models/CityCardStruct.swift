@@ -6,19 +6,27 @@
 //
 
 import Foundation
-
-// TODO: Посмотри как сделать структуру проекта, у меня есть пример, но лучше самому посмотреть, добавь gitignore,чтобы на git не заливать лишние файлы
+///Структура карточки города
 struct CityCard: Hashable, Identifiable {
-    // TODO: Нужно
+    ///Идентефикационный номер
     let id = UUID()
+    /// Название города
     var name: String
+    ///Температура города в текущий момент
     var temperature: String
+    ///Иконка покоды в текущий момент
     var icon: String
+    ///Кратное описание погоды в текущий момент
     var ShortWeather: String
+    ///Минимальная температура за день
     var temperatureMin: String
+    ///Максимальная температура за день
     var temperatureMax: String
+    ///Скорость ветра в текущий момент
     var wind: String
+    ///Влажность в текущий момент
     var humidity: Int
+    ///Дата
     var date: String
 }
 
