@@ -20,7 +20,7 @@ final class NetworkManager {
     }
     ///Фнкция получения информации о погоде в искомом городе
     func getWeather(for SearchCity:String) async throws -> Welcome{
-        let urlWeather = "https://api.openweathermap.org/data/2.5/forecast?q=\(SearchCity)&appid=\(apiKey)&units=metric"
+        let urlWeather = "https://api.openweathermap.org/data/2.5/forecast?q=\(SearchCity)&appid=\(apiKey)&units=metric&lang=ru"
         
         guard let url = URL(string: urlWeather) else {throw NetworkError.invalidURL}
         

@@ -32,10 +32,10 @@ struct ShowDetailsView: View {
                     .font(.largeTitle)
                     .padding()
                     .frame(maxWidth: .infinity)
-                }
-            
-            VStack(alignment: .center, spacing: 20){
+                
+                
                 Text("\(cityCard.date)")
+                    .padding()
                 
                 Text("\(cityCard.temperature)")
                     .font(.title)
@@ -45,6 +45,8 @@ struct ShowDetailsView: View {
                     .frame(width: 170, height: 150)
                 
                 Text("\(cityCard.ShortWeather)")
+                    .frame(maxWidth: 300)
+                    .lineLimit(nil)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .padding()
@@ -72,7 +74,7 @@ struct ShowDetailsView: View {
                         .tag(true)
                 }
                 .pickerStyle(.segmented)
-                    
+                
                 if whichForecast {
                     DailyForecast(cityName: cityCard.name)
                         .padding(10.0)
