@@ -10,10 +10,13 @@ import SwiftUI
 import SwiftUI
 
 struct HourlyForecast: View {
+    
     ///Переменная для хранения извлеченных данных
     @State private var items: [HourlyForecastStruct] = []
+    
     ///Переменная для обозначения загрузки
     @State private var isLoading = false
+    
     ///Переменную берем извне
     let cityName: String
 
@@ -28,10 +31,15 @@ struct HourlyForecast: View {
                     HStack(spacing: 16) {
                         ForEach(items, id: \.time) { item in
                             VStack(spacing: 6) {
+                                
                                 Text(item.time)
                                     .font(.caption)
+                                
                                 Image(item.icon)
-                                    .font(.title2)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 48, height: 48)
+                                
                                 Text(item.temperature)
                                     .font(.subheadline)
                                     .fontWeight(.semibold)

@@ -8,10 +8,13 @@
 import SwiftUI
 ///Структура для описания прогноза погоды на 7 дней
 struct DailyForecast: View {
+    
     ///Переменная для хранения извлеченных данных
     @State private var items: [DailyForecastStruct] = []
+    
     ///Переменная для обозначения загрузки
     @State private var isLoading = false
+    
     ///Переменную берем извне
     let cityName: String
 
@@ -26,10 +29,15 @@ struct DailyForecast: View {
                     HStack(spacing: 16) {
                         ForEach(items, id: \.day) { item in
                             VStack(spacing: 6) {
+                                
                                 Text(item.day)
                                     .font(.caption)
+                                
                                 Image(item.icon)
-                                    .font(.title2)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 48, height: 48)
+                                
                                 Text(item.temperature)
                                     .font(.subheadline)
                                     .fontWeight(.semibold)

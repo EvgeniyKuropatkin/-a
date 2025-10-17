@@ -8,10 +8,13 @@
 import SwiftUI
 ///Структура предназначенная для показа карточки города на 1 экране, содержащая краткое описание погоды и дополнительную кнопку перехода к подробностям погоды в городе
 struct CityCardView: View {
+    
     ///создание карточки города
     let cityCard: CityCard
+    
     ///переменная для удаления карточки города из cityCards
     let onDelete: () -> Void
+    
     ///переменная для переключения на подробное описание погоды в избранном городе
     @State private var showDetails = false;
     
@@ -58,7 +61,7 @@ struct CityCardView: View {
                 }
                 label:{
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.white)
+                        .foregroundColor(.gray.opacity(0.5))
                         .padding(5)
                 }
             }

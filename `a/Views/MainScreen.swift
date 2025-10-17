@@ -9,14 +9,19 @@
 import SwiftUI
 ///Структура предназначенная для показа первого экрана, содержащего 2 города искомых по умолчанию и поле поиска нового города
 struct MainScreen: View {
+    
     ///Переменная для нахождения первого города по умолчанияю
     let firstSearch = "Москва"
+    
     ///Переменная для нахождения второго города по умолчанияю
     let secondSearch = "Ростов-на-Дону"
+    
     ///Переменная предназначенная для поиска нового города
     @State private var SearchCity = ""
+    
     ///Список городов которые отображаются на экране
     @State private var cityCards: [CityCard] = []
+    
     ///Переменная для выдачи ошибки, о ненахождении искомого города
     @State private var errorMessage: String?
     
@@ -32,6 +37,7 @@ struct MainScreen: View {
                 addCity(named: firstSearch)
                 addCity(named: secondSearch)
             }
+            
             ScrollView {
                 ForEach(cityCards) { card in
                     CityCardView(cityCard: card) {

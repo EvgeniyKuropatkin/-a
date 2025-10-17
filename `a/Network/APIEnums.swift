@@ -8,10 +8,13 @@
 import Foundation
 ///Enums для хранения ошибок при работе с API
 enum NetworkError: String, Error{
+    
     /// Неверный URL
     case invalidURL = "InvalidURL"
+    
     ///Невалидные данные
     case invalidResponse = "InvalidResponse"
+    
     ///Невалидные данные
     case invadidData = "InvalidData"
 }

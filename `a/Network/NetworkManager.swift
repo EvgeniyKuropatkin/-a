@@ -11,13 +11,16 @@ final class NetworkManager {
     ///Общедоступный экземпляр `NetworkManager`
     static let shared = NetworkManager()
     ///Ключ к используемой API
+    ///
     private let apiKey = "d5f8af7831dbd10890d036582b0d6628"
     ///Декодер JSON
     let decoder = JSONDecoder()
+    
     /// Приватный инициализатор, предотвращающий создание дополнительных экземпляров.
     private init() {
         decoder.dateDecodingStrategy = .iso8601
     }
+    
     ///Фнкция получения информации о погоде в искомом городе
     func getWeather(for SearchCity:String) async throws -> Welcome{
         let urlWeather = "https://api.openweathermap.org/data/2.5/forecast?q=\(SearchCity)&appid=\(apiKey)&units=metric&lang=ru"
