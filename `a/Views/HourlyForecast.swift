@@ -38,7 +38,7 @@ struct HourlyForecast: View {
                                 Image(item.icon)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 48, height: 48)
+                                    .frame(width: 64, height: 64)
                                 
                                 Text(item.temperature)
                                     .font(.subheadline)

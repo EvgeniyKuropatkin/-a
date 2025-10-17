@@ -66,6 +66,7 @@ struct ShowDetailsView: View {
                     .tag(true)
             }
             .pickerStyle(.segmented)
+            .padding(20.0)
             
             if whichForecast {
                 DailyForecast(cityName: cityCard.name)
